@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Courier courier = new Courier("Гожан Александр", "88005353535", "");
+        Courier courier = new Courier("Гожан Александр", "88005353535", "Nothing");
 
         TextView textView = findViewById(R.id.courier_name);
         textView.setText(courier.getName());
