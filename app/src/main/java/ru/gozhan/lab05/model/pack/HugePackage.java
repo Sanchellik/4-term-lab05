@@ -13,4 +13,8 @@ public class HugePackage extends Package {
         return weight;
     }
 
+    @Override
+    public String getType() {
+        return "H";
+    }
 }

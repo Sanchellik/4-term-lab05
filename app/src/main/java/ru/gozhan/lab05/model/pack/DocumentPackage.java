@@ -24,4 +24,8 @@ public class DocumentPackage extends Package {
         return toWhom;
     }
 
+    @Override
+    public String getType() {
+        return "D";
+    }
 }

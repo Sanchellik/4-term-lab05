@@ -6,14 +6,14 @@ public class Courier {
 
     private final String name;
     private final String paymentAccount;
-    private final String features;
+    private final String abilities;
 
-    private final ArrayList<Order> orders;
+    private ArrayList<Order> orders;
 
-    public Courier(String name, String paymentAccount, String features) {
+    public Courier(String name, String paymentAccount, String abilities) {
         this.name = name;
         this.paymentAccount = paymentAccount;
-        this.features = features;
+        this.abilities = abilities;
         this.orders = new ArrayList<>();
     }
 
@@ -25,8 +25,8 @@ public class Courier {
         return paymentAccount;
     }
 
-    public String getFeatures() {
-        return features;
+    public String getAbilities() {
+        return abilities;
     }
 
     public ArrayList<Order> getOrders() {
@@ -37,4 +37,7 @@ public class Courier {
         this.orders.add(order);
     }
 
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
+    }
 }

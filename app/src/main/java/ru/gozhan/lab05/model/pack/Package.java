@@ -26,4 +26,6 @@ public abstract class Package {
         return requirements;
     }
 
+    public abstract String getType();
+
 }

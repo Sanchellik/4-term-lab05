@@ -14,6 +14,8 @@ public class Order {
 
     private final int price;
 
+    private boolean isSelected;
+
     public Order(Company company, Package pack, String departureAddress, String deliveryAddress, int price) {
         this.company = company;
         this.pack = pack;
@@ -57,4 +59,13 @@ public class Order {
     public int hashCode() {
         return Objects.hash(getCompany(), getPack(), getDepartureAddress(), getDeliveryAddress(), getPrice());
     }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
 }
