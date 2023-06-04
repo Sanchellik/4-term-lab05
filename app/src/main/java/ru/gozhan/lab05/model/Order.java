@@ -68,4 +68,16 @@ public class Order {
         isSelected = selected;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "company=" + company +
+                ", pack=" + pack +
+                ", departureAddress='" + departureAddress + '\'' +
+                ", deliveryAddress='" + deliveryAddress + '\'' +
+                ", price=" + price +
+                ", isSelected=" + isSelected +
+                '}';
+    }
+
 }

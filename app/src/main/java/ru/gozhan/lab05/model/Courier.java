@@ -43,4 +43,7 @@ public class Courier {
         return getAbilities().contains(courierAbility);
     }
 
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
 }

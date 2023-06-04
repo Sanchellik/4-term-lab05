@@ -121,4 +121,8 @@ public class OrderAdapter extends BaseAdapter {
         return orders;
     }
 
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
+    }
+
 }

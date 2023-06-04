@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/group_courier_abilities"
+        android:title="Courier Abilities" >
+<!--        android:icon="@drawable/ic_courier_abilities" > &lt;!&ndash; Замените иконку на вашу &ndash;&gt;-->
+        <menu>
+        </menu>
+    </item>
+
+</menu>
