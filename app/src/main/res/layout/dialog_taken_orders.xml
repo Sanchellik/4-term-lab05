@@ -9,6 +9,13 @@
         android:layout_height="wrap_content"
         android:text="Taken Orders" />
 
+    <ListView
+        android:id="@+id/taken_orders_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/taken_orders_text"
+        android:layout_above="@+id/cancel_orders_button" />
+
     <Button
         android:id="@+id/cancel_orders_button"
         android:layout_width="wrap_content"

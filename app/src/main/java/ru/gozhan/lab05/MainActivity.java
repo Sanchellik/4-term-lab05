@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import ru.gozhan.lab05.adapter.OrderAdapter;
+import ru.gozhan.lab05.adapter.TakenOrderAdapter;
 import ru.gozhan.lab05.constant.CourierAbility;
 import ru.gozhan.lab05.model.Company;
 import ru.gozhan.lab05.model.Courier;
@@ -110,14 +111,11 @@ public class MainActivity extends AppCompatActivity {
         takenOrdersDialog.setContentView(R.layout.dialog_taken_orders);
 
         TextView takenOrdersText = takenOrdersDialog.findViewById(R.id.taken_orders_text);
+        ListView takenOrdersList = takenOrdersDialog.findViewById(R.id.taken_orders_list);
         Button cancelOrdersButton = takenOrdersDialog.findViewById(R.id.cancel_orders_button);
 
-        // Добавьте здесь код для отображения взятых заказов
-        String takenOrdersInfo = "";
-        for (Order order : courier.getOrders()) {
-            takenOrdersInfo += order.toString() + "\n";
-        }
-        takenOrdersText.setText(takenOrdersInfo);
+        TakenOrderAdapter takenOrdersAdapter = new TakenOrderAdapter(this, courier.getOrders());
+        takenOrdersList.setAdapter(takenOrdersAdapter);
 
         cancelOrdersButton.setOnClickListener(v -> cancelAllOrders());
 
@@ -127,7 +125,9 @@ public class MainActivity extends AppCompatActivity {
     private void cancelAllOrders() {
         orders.addAll(courier.getOrders());
         courier.getOrders().clear();
-        takenOrdersDialog.dismiss();
+        if (takenOrdersDialog != null) {
+            takenOrdersDialog.dismiss();
+        }
         displayAvailableOrders();
         setCourierInfo();
     }
