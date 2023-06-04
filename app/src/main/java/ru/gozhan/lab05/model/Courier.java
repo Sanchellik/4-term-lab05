@@ -1,6 +1,7 @@
 package ru.gozhan.lab05.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ru.gozhan.lab05.constant.CourierAbility;
 
@@ -41,6 +42,10 @@ public class Courier {
 
     public boolean hasAbility(CourierAbility courierAbility) {
         return getAbilities().contains(courierAbility);
+    }
+
+    public void addAbilities(List<CourierAbility> abilities) {
+        this.abilities.addAll(abilities);
     }
 
 }

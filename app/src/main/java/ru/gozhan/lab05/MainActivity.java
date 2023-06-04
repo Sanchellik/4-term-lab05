@@ -1,19 +1,24 @@
 package ru.gozhan.lab05;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import ru.gozhan.lab05.adapter.OrderAdapter;
 import ru.gozhan.lab05.constant.CourierAbility;
@@ -32,34 +37,22 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Order> displayedOrders;
 
     private Courier courier;
-    private List<CourierAbility> selectedAbilities;
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == R.id.menu_courier_abilities) {
-            // Обработка выбора пункта меню "Courier Abilities"
-            courier.addAbility();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    private ArrayList<CourierAbility> selectedAbilities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+        selectedAbilities = new ArrayList<>();
 
         courier = new Courier(
                 "Gozhan Alexandr",
                 "88005353535",
-                new ArrayList<>());
+                selectedAbilities);
 
         setCourierInfo(courier);
 
@@ -138,9 +131,55 @@ public class MainActivity extends AppCompatActivity {
         TextView courierPaymentAccount = findViewById(R.id.courier_paymentAccount);
         courierPaymentAccount.setText(courier.getPaymentAccount());
 
-        TextView courierAbilities = findViewById(R.id.courier_abilities);
-        courierAbilities.setText(courier.getAbilities().toString());
+        updateCourierAbilitiesTextView();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_courier_abilities, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_courier_abilities) {
+            showPopupMenu(item.getActionView());
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showPopupMenu(View anchorView) {
+        PopupMenu popupMenu = new PopupMenu(this, anchorView);
+        popupMenu.inflate(R.menu.menu_courier_abilities);
+
+        Menu menu = popupMenu.getMenu();
+        for (CourierAbility ability : CourierAbility.values()) {
+            menu.add(Menu.NONE, ability.ordinal(), Menu.NONE, ability.toString());
+        }
+
+        popupMenu.setOnMenuItemClickListener(item -> {
+            item.setChecked(!item.isChecked());
+            int itemId = item.getItemId();
+            CourierAbility selectedAbility = CourierAbility.values()[itemId];
+            if (item.isChecked()) {
+                selectedAbilities.add(selectedAbility);
+            } else {
+                selectedAbilities.remove(selectedAbility);
+            }
+            updateCourierAbilitiesTextView();
+            return true;
+        });
+
+        popupMenu.show();
+    }
+
+    private void updateCourierAbilitiesTextView() {
+        TextView courierAbilities = findViewById(R.id.courier_abilities);
+        courierAbilities.setText(selectedAbilities.toString());
+    }
+
 
     //TODO abilities enum. Умею работать с документом, с хрупким
     //TODO menu справа сверху checkbox с выбором abilities
