@@ -64,18 +64,18 @@ public class CreateAllObjects {
     public static List<Package> createPackages() {
         List<Package> packages = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
-            Package smallPackage = new SmallPackage("Clock", false);
+        for (int i = 0; i < 4; i++) {
+            Package smallPackage = new SmallPackage("15*15*15", false);
             packages.add(smallPackage);
         }
 
-        for (int i = 0; i < 10; i++) {
-            Package hugePackage = new HugePackage("Car", true, 100);
+        for (int i = 0; i < 3; i++) {
+            Package hugePackage = new HugePackage("100*150*150", true, 100);
             packages.add(hugePackage);
         }
 
-        for (int i = 0; i < 10; i++) {
-            Package documentPackage = new DocumentPackage("Laptop", false, "Requirements", "From", "To");
+        for (int i = 0; i < 3; i++) {
+            Package documentPackage = new DocumentPackage("10*10*0.5", true, "Me", "Him");
             packages.add(documentPackage);
         }
 

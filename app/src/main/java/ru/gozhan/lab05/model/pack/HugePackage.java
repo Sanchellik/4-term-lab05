@@ -1,11 +1,13 @@
 package ru.gozhan.lab05.model.pack;
 
+import ru.gozhan.lab05.constant.CourierAbility;
+
 public class HugePackage extends Package {
 
     private final int weight;
 
     public HugePackage(String size, boolean isFragile, int weight) {
-        super(size, isFragile, "car");
+        super(size, isFragile, CourierAbility.CAR_DELIVERY);
         this.weight = weight;
     }
 
@@ -17,4 +19,5 @@ public class HugePackage extends Package {
     public String getType() {
         return "H";
     }
+
 }

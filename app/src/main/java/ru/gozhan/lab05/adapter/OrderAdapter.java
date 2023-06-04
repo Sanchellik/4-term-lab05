@@ -11,21 +11,25 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ru.gozhan.lab05.R;
+import ru.gozhan.lab05.constant.CourierAbility;
+import ru.gozhan.lab05.model.Courier;
 import ru.gozhan.lab05.model.Order;
+import ru.gozhan.lab05.model.pack.DocumentPackage;
+import ru.gozhan.lab05.model.pack.HugePackage;
+import ru.gozhan.lab05.model.pack.Package;
+import ru.gozhan.lab05.model.pack.SmallPackage;
 
 public class OrderAdapter extends BaseAdapter {
 
+    private Courier courier;
     private ArrayList<Order> orders;
     private LayoutInflater layoutInflater;
-    private boolean isSelectedAll = false;
+    private boolean isCourierAvailable = false;
 
-    public void setSelectedAll() {
-        this.isSelectedAll = !isSelectedAll;
-    }
-
-    public OrderAdapter(Context context, ArrayList<Order> orders) {
+    public OrderAdapter(Context context, ArrayList<Order> orders, Courier courier) {
         this.orders = orders;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.courier = courier;
     }
 
     @Override
@@ -61,8 +65,24 @@ public class OrderAdapter extends BaseAdapter {
         Order order = getOrder(position);
 
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
+            isCourierAvailable = false;
+
+            Package pack = ((Order) getItem(position)).getPack();
+            if (pack instanceof HugePackage && courier.hasAbility(CourierAbility.CAR_DELIVERY)) {
+                isCourierAvailable = true;
+            } else if (pack instanceof DocumentPackage && courier.hasAbility(CourierAbility.DOCS_DELIVERY)) {
+                isCourierAvailable = true;
+            } else if (pack.isFragile() && courier.hasAbility(CourierAbility.FRAGILE_DELIVERY)) {
+                isCourierAvailable = true;
+            } else if (pack instanceof SmallPackage && !pack.isFragile()) {
+                isCourierAvailable = true;
+            }
+
+            if (isCourierAvailable && isChecked) {
                 order.setSelected(true);
+            } else {
+                checkBox.setChecked(false);
+                order.setSelected(false);
             }
             notifyDataSetChanged();
         });
@@ -76,27 +96,29 @@ public class OrderAdapter extends BaseAdapter {
 
         boolean flag = false;
         for (int i = 0; i < orders.size(); i++) {
-            if (orders.get(i).isSelected()) flag = true;
+            if (orders.get(i).isSelected()) {
+                flag = true;
+            }
         }
-        if (!flag) checkBox.setChecked(false);
+        if (!flag) {
+            checkBox.setChecked(false);
+        }
 
         return view;
-
     }
 
     private Order getOrder(int position) {
         return (Order) getItem(position);
     }
 
-    public void updateRecords(ArrayList<Order> orders) {
+    public void updateRecords(ArrayList<Order> orders, Courier courier) {
         this.orders = orders;
+        this.courier = courier;
         notifyDataSetChanged();
     }
-
 
     public ArrayList<Order> getOrders() {
         return orders;
     }
-
 
 }

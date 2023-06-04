@@ -1,14 +1,16 @@
 package ru.gozhan.lab05.model.pack;
 
+import ru.gozhan.lab05.constant.CourierAbility;
+
 public abstract class Package {
 
     protected String size;
 
     protected boolean isFragile;
 
-    protected String requirements;
+    protected CourierAbility requirements;
 
-    public Package(String size, boolean isFragile, String requirements) {
+    public Package(String size, boolean isFragile, CourierAbility requirements) {
         this.size = size;
         this.isFragile = isFragile;
         this.requirements = requirements;
@@ -22,7 +24,7 @@ public abstract class Package {
         return isFragile;
     }
 
-    public String getRequirements() {
+    public CourierAbility getRequirements() {
         return requirements;
     }
 

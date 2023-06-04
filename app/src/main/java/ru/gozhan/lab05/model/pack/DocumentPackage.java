@@ -1,5 +1,7 @@
 package ru.gozhan.lab05.model.pack;
 
+import ru.gozhan.lab05.constant.CourierAbility;
+
 public class DocumentPackage extends Package {
 
     private final String fromWhom;
@@ -7,11 +9,10 @@ public class DocumentPackage extends Package {
 
     public DocumentPackage(String size,
                            boolean isFragile,
-                           String requirements,
                            String fromWhom,
                            String toWhom) {
 
-        super(size, isFragile, requirements);
+        super(size, isFragile, CourierAbility.DOCS_DELIVERY);
         this.fromWhom = fromWhom;
         this.toWhom = toWhom;
     }
@@ -28,4 +29,5 @@ public class DocumentPackage extends Package {
     public String getType() {
         return "D";
     }
+
 }
