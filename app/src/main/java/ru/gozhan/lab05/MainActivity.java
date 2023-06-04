@@ -1,9 +1,6 @@
 package ru.gozhan.lab05;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,8 +9,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import ru.gozhan.lab05.adapter.OrderAdapter;
 import ru.gozhan.lab05.constant.CourierAbility;
@@ -32,24 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Order> displayedOrders;
 
     private Courier courier;
-    private List<CourierAbility> selectedAbilities;
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == R.id.menu_courier_abilities) {
-            // Обработка выбора пункта меню "Courier Abilities"
-            courier.addAbility();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
