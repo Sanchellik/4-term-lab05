@@ -34,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
         TextView textView1 = findViewById(R.id.courier_paymentAccount);
         textView1.setText(courier.getPaymentAccount());
 
-        TextView textView2 = findViewById(R.id.courier_abilities);
-        textView2.setText(courier.getAbilities());
-
         ArrayList<Company> companies = (ArrayList<Company>) CreateAllObjects.createCompanies();
         ArrayList<Package> packages = (ArrayList<Package>) CreateAllObjects.createPackages();
         ArrayList<Order> orders = (ArrayList<Order>) CreateAllObjects.createOrders(companies, packages);
@@ -74,5 +71,9 @@ public class MainActivity extends AppCompatActivity {
     private void showInfo(double cost) {
         Toast.makeText(this, "Total: " + cost, Toast.LENGTH_LONG).show();
     }
+
+    //TODO abilities enum 5 штук. Умею работать с документом, с хрупким
+    //TODO menu справа сверху checkbox с выбором abilities
+    //TODO исчезание после выбора и accept
 
 }
